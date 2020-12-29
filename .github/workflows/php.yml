@@ -24,22 +24,25 @@ jobs:
     - name: Validate composer.json and composer.lock
       working-directory: ./php
       run: composer validate
-
+  
     - name: Cache Composer packages   
       id: composer-cache
       uses: actions/cache@v2
-      with:
-        working-directory: ./php        
-        path: vendor
+      with:            
+        path: php/vendor
         key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
         restore-keys: |
           ${{ runner.os }}-php-
-
+    
     - name: Composer Install
       if: steps.composer-cache.outputs.cache-hit != 'true'      
       working-directory: ./php
       run: composer install --prefer-dist --no-progress --no-suggest
-    
+  
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:        
     #PHPStan Static Code Analysis 
     - name: PHPStan
       working-directory: ./php
