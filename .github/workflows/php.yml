@@ -9,9 +9,16 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest    
+    
 
     steps:
+    - name: Setup PHP with PECL extension
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '7.4'
+        extensions: imagick, swoole 
+          
     - uses: actions/checkout@v2
 
     - name: Validate composer.json and composer.lock
@@ -22,14 +29,15 @@ jobs:
       id: composer-cache
       uses: actions/cache@v2
       with:
-        working-directory: ./php  
+        working-directory: ./php
+        php-version: '7.4'  
         path: vendor
         key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
         restore-keys: |
           ${{ runner.os }}-php-
 
     - name: Install dependencies
-      if: steps.composer-cache.outputs.cache-hit != 'true'
+      if: steps.composer-cache.outputs.cache-hit != 'true'      
       working-directory: ./php
       run: composer install --prefer-dist --no-progress --no-suggest
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
