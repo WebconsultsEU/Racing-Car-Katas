@@ -15,12 +15,14 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Validate composer.json and composer.lock
+      working-directory: ./php
       run: composer validate
 
-    - name: Cache Composer packages
+    - name: Cache Composer packages   
       id: composer-cache
       uses: actions/cache@v2
       with:
+        working-directory: ./php  
         path: vendor
         key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
         restore-keys: |
