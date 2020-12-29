@@ -24,11 +24,11 @@
     "scripts": {
         "checkcode": "phpcs src tests --standard=PSR12",
         "fixcode": "phpcbf src tests --standard=PSR12",
-        "test": "phpunit",
-        "tests": "phpunit",
-        "test-coverage": "phpunit --coverage-html build/coverage",
+        "test": "vendor/bin/phpunit",
+        "tests": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html build/coverage",
         "check-cs": "ecs check src tests --ansi",
         "fix-cs": "ecs check src tests --fix --ansi",
-        "phpstan": "phpstan analyse --ansi"
+        "phpstan": "vendor/bin/phpstan analyse --ansi"
     }
 }
