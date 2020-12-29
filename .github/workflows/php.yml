@@ -47,10 +47,10 @@ jobs:
     - name: PHPStan
       working-directory: ./php
       continue-on-error: true
-      run: composer run-script phpstan    
+      run: vendor/bin/phpstan analyse --ansi   
       
     #Run PHPUnit Tests 
     - name: PHPUnit Tests
       working-directory: ./php
       continue-on-error: true
-      run: composer run-script test
+      run: vendor/bin/phpunit
