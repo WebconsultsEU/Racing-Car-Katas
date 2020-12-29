@@ -44,11 +44,10 @@ jobs:
     - name: PHPStan
       working-directory: ./php
       continue-on-error: true
-      run: ./vendor/bin/phpstan analyse --ansi   
+      run: vendor/bin/phpstan analyse --ansi   
       
     #Run PHPUnit Tests 
     - name: PHPUnit Tests
       working-directory: ./php
       continue-on-error: false
-      run:       
-        php/vendor/bin/phpunit
+      run: ./vendor/bin/phpunit
