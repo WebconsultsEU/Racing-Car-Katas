@@ -39,10 +39,7 @@ jobs:
       working-directory: ./php
       run: composer install --prefer-dist --no-progress --no-suggest
   
-  test:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:        
+ 
     #PHPStan Static Code Analysis 
     - name: PHPStan
       working-directory: ./php
